@@ -1,5 +1,7 @@
 # Xpense – AI-Powered Finance Tracker
 
+Xpense is an intelligent, AI-driven finance tracker designed to simplify your personal financial management. It helps you stay on top of your spending with features like automated receipt scanning, real-time budget alerts, smart transaction categorization, and personalized financial insights.
+
 ##  Features
 
 -  **AI Receipt Scanning**: Upload or snap a picture of your receipt, and let AI extract and categorize your expenses automatically.
