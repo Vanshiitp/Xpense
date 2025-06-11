@@ -1,40 +1,16 @@
-<<<<<<< HEAD
-# Xpense
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Xpense – AI-Powered Finance Tracker
 
-## Getting Started
+##  Features
 
-First, run the development server:
+-  **AI Receipt Scanning**: Upload or snap a picture of your receipt, and let AI extract and categorize your expenses automatically.
+-  **Smart Transaction Management**: Automatically track and organize your expenses across different categories with real-time updates.
+-  **AI-Driven Insights**: Get personalized suggestions and trends based on your spending habits to make better financial decisions.
+-  **Budget Alerts**: Set spending limits and receive email notifications when you're close to or exceed your budget.
+-  **Interactive Dashboards**: Visualize your finances using responsive, user-friendly charts and graphs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+##  Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> ecca08a (first commit)
+- **Frontend**: React.js, Next.js, Tailwind CSS, Shadcn UI  
+- **Backend**: Supabase, Prisma  
+- **Authentication**: Clerk  
+- **Event Handling**: Inngest  
