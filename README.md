@@ -18,38 +18,37 @@ Xpense is an intelligent, AI-driven finance tracker designed to simplify your pe
 - **Event Handling**: Inngest
 
 ##  Getting Started
-  1. Clone the repo:
-     ```bash
-     git clone https://github.com/Vanshiitp/Xpense.git
-     cd Xpense
-     ```
-  
-  2. Install dependencies:
-     ```bash
-     npm install
-     ```
-  
-  3. Create a `.env.local` file with the following variables:
-     ```env
-     DATABASE_URL=
-     DIRECT_URL=
-  
-     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-     CLERK_SECRET_KEY=
-     NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-     NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboarding
-     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/onboarding
-  
-     GEMINI_API_KEY=
-     RESEND_API_KEY=
-     ARCJET_KEY=
-     ```
-  
-  4. Start the dev server:
-     ```bash
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/Vanshiitp/Xpense.git
+   cd Xpense
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env.local` file with the following variables:
+   ```env
+   DATABASE_URL=
+   DIRECT_URL=
+
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+   CLERK_SECRET_KEY=
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/onboarding
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/onboarding
+
+   GEMINI_API_KEY=
+   RESEND_API_KEY=
+   ```
+
+4. Start the dev server:
+   ```bash
      npm run dev
      ```
   
-  Open `http://localhost:3000` to view the app.
+Open `http://localhost:3000` to view the app.
 
