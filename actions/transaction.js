@@ -206,7 +206,7 @@ export async function getUserTransactions(query = {}) {
 // Scan Receipt
 export async function scanReceipt(file) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     // Convert File to ArrayBuffer
     const arrayBuffer = await file.arrayBuffer();
@@ -238,41 +238,67 @@ export async function scanReceipt(file) {
       }
     `;
 
-    const result = await model.generateContent([
+    const parts = [
       {
         inlineData: {
           data: base64String,
           mimeType: file.type,
         },
       },
-      prompt,
-    ]);
+      { text: prompt },
+    ];
 
-    const response = await result.response;
-    const text = response.text();
-    const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
+    // Retry transient failures (overload, rate limit, bad/empty output)
+    const MAX_ATTEMPTS = 3;
+    let lastError;
 
-    try {
-      const data = JSON.parse(cleanedText);
-      
-      // Check if the response indicates an invalid receipt
-      if (data.isValid === false) {
-        return { isValid: false, error: data.error };
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+      try {
+        const result = await model.generateContent({
+          contents: [{ role: "user", parts }],
+          generationConfig: { responseMimeType: "application/json" },
+        });
+
+        const text = result.response.text();
+        // Strip code fences and grab the outermost JSON object
+        const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
+        const jsonMatch = cleanedText.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error("No JSON in model response");
+
+        const data = JSON.parse(jsonMatch[0]);
+
+        // Model says it isn't a receipt: don't retry
+        if (data.isValid === false) {
+          return { isValid: false, error: data.error || "Invalid receipt" };
+        }
+
+        const amount = parseFloat(String(data.amount).replace(/[^0-9.]/g, ""));
+        let date = new Date(data.date);
+        if (isNaN(date.getTime())) date = new Date();
+
+        if (!Number.isFinite(amount) || amount <= 0) {
+          throw new Error(`Invalid amount in response: ${data.amount}`);
+        }
+
+        return {
+          isValid: true,
+          amount,
+          date,
+          description: data.description,
+          category: data.category,
+          merchantName: data.merchantName,
+        };
+      } catch (err) {
+        lastError = err;
+        console.error(`Receipt scan attempt ${attempt} failed:`, err.message);
+        if (attempt < MAX_ATTEMPTS) {
+          await new Promise((r) => setTimeout(r, 1000 * attempt));
+        }
       }
-
-
-      return {
-        isValid: true,
-        amount: parseFloat(data.amount),
-        date: new Date(data.date),
-        description: data.description,
-        category: data.category,
-        merchantName: data.merchantName,
-      };
-    } catch (parseError) {
-      console.error("Error parsing JSON response:", parseError);
-      return { isValid: false, error: "Failed to process receipt data" };
     }
+
+    console.error("Error scanning receipt:", lastError?.message);
+    return { isValid: false, error: "Failed to scan receipt" };
   } catch (error) {
     console.error("Error scanning receipt:", error.message);
     return { isValid: false, error: "Failed to scan receipt" };
