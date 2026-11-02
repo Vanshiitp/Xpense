@@ -49,7 +49,10 @@ Xpense is an intelligent, AI-driven finance tracker designed to simplify your pe
    ```bash
      npm run dev
      ```
+<<<<<<< HEAD
   
 
 
 
+=======
+>>>>>>> 3e817e0331e60818bf826b42a11bbb96ccfd4470
