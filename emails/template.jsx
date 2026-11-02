@@ -42,7 +42,7 @@ export default function EmailTemplate({
   type = "budget-alert",
   data = {},
 }) {
-  const formatCurrency = (amount) => `$ ${Number(amount).toFixed(2).toLocaleString()}`;
+  const formatCurrency = (amount) => `₹${Number(amount).toFixed(2).toLocaleString("en-IN")}`;
 
   const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 

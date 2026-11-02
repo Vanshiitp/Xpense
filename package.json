@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "email:dev": "email dev",
-    "email:build": "email build"
+    "email:build": "email build",
+    "postinstall" : "prisma generate"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^1.10.0",
